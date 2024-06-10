@@ -1,0 +1,23 @@
+Proyecto Estructuras de Datos y Algoritmos - EXECUTE (Ejecución)
+
+Este archivo describe los pasos necesarios para ejecutar el proyecto "Optimización de Búsqueda en Texto".
+
+1. Requisitos del Sistema:
+   - Python 3.13 instalado en el sistema.
+   - Archivos del proyecto descomprimidos en una ubicación accesible.
+
+2. Ejecución del Cliente Interactivo:
+   - Abre una terminal o línea de comandos, recomenpdado Terminal powershell.
+   - Navega hasta el directorio donde se encuentran los archivos del proyecto.
+   - Ejecuta el siguiente comando para iniciar el cliente interactivo:
+     ```
+     python fuente/src/cliente_interactivo.py
+     ```
+
+3. Interacción con el Cliente:
+   - El cliente interactivo guiará a través de las opciones para cargar archivos de texto y realizar búsquedas.
+   - Sigue las instrucciones en la terminal para seleccionar un archivo, elegir un método de búsqueda y especificar el patrón a buscar.
+   - Observa los resultados mostrados en la terminal y sigue las opciones para realizar más búsquedas o salir del programa.
+
+4. Cierre del Cliente:
+   - Cuando se haya terminado en decidir ya no realizar búsquedas, se puede cerrar el cliente interactivo seleccionando la opción correspondiente en el menú, el cual sería "Salir".
