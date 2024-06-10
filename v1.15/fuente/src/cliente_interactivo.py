@@ -121,8 +121,7 @@ def main():
             print(f"Lineas encontradas: {lineas_encontradas}")
             print(f"Total de búsquedas encontradas: {busquedas_encontradas} \n")
             for resultado in resultados:
-                pass 
-                #print(f"Línea {resultado[0]} | (Apariciones: {resultado[2]}): {resultado[1]}")
+                print(f"Línea {resultado[0]} | (Apariciones: {resultado[2]}): {resultado[1]}")
 
 if __name__ == "__main__":
     main()
