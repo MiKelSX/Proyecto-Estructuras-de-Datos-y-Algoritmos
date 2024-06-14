@@ -1,0 +1,460 @@
+\documentclass[12pt, twoside]{article}
+\usepackage[letterpaper, margin=1in]{geometry}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{algpseudocode}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{forest}
+\usepackage{booktabs}
+\usepackage{dirtree}
+\usepackage{float}
+\usepackage{adjustbox}
+\usepackage{array}
+\definecolor{lightgray}{RGB}{245, 245, 245} % Define un tono de gris más claro
+
+\lstset{
+  language=Python,
+  numbers=left,
+  basicstyle=\small\ttfamily,
+  frame=single,
+  backgroundcolor=\color{lightgray},
+  rulecolor=\color{black},
+  framexleftmargin=7mm,
+  xleftmargin=mm,
+}
+
+\begin{document}
+
+%-----------Portada-----------%
+\begin{figure}[tbp]
+\includegraphics[width=65mm]{Imagenes/informatica-negro.png}
+\vspace{1cm}
+\newline
+\centerline{\huge \bf Proyecto Estructuras de Datos y Algoritmos}
+\vspace{0.8cm}
+\newline
+\vspace{0.4cm}
+\centerline{\Large \bf Optimización de Búsqueda en texto:}
+\vspace{0.2cm}
+\centerline{\Large \bf Comparación y evaluación de métodos}
+\centerline{\Large \bf de búsquedas eficientes}
+\vspace{0.5cm}
+\newline
+
+
+\hfill \begin{tabular}{ll}\vspace{0.2cm}
+Fecha:  & 13/06/2024\\
+Autores:  & Miguel Cornejo\\ \vspace{0.2cm}
+& Diego González\\
+e-mail: & mcornejoc4@uft.edu\\ \vspace{0.2cm}
+& dgonzalezt2@uft.edu\\
+Profesor:  &  Rodrigo Paredes
+\end{tabular}
+\end{figure}
+\textcolor{white}{a}
+\newpage
+
+%--------Índice-----------%
+\tableofcontents
+\newpage
+
+
+%-----------Introducción------------%
+\section{Introducción}
+La eficiencia en la búsqueda de datos es esencial en el ámbito de la informática para el manejo óptimo de las bases de datos. Este estudio simula el funcionamiento de motores de búsqueda como Google al implementar y evaluar algoritmos de búsqueda en textos. El objetivo principal es determinar experimentalmente si la búsqueda indexada es más efectiva que la búsqueda bruta o secuencial línea por línea. Se pretende demostrar a través de la implementación de un cliente interactivo que la implementación de un índice basado en tablas de hash no solo optimiza el tiempo de búsqueda, sino que también facilita la gestión de grandes volúmenes de datos. Esto se logra mediante la comparación de la búsqueda indexada con la fuerza bruta, la búsqueda por diccionario, y la codificación propia de las tablas de hash. Los resultados obtenidos proporcionarán una comprensión más profunda de las estructuras de datos y algoritmos involucrados, así como una base sólida para futuras investigaciones sobre la optimización de búsquedas de datos.
+\newpage
+
+%-----------Análisis del Problema------------%
+\section{Análisis del Problema}
+La búsqueda eficiente de datos en textos es un desafío en el campo de la informática, especialmente en el manejo de grandes volúmenes de información en bases de datos. En este estudio, se aborda el problema de cómo optimizar la búsqueda de patrones en textos, comparando la eficacia de diferentes métodos de búsqueda. El objetivo es determinar si la búsqueda indexada, utilizando un índice basado en tablas de hash, puede superar en rendimiento a la búsqueda secuencial línea por línea, también conocida como fuerza bruta, así como también puede ser la búsqueda por diccionario.
+
+\subsection{Supuestos o condiciones}
+Se asume que la premisa de los textos a analizar puede variar significativamente en tamaño, desde pequeños kilobytes hasta megabytes. Los patrones de búsqueda son secuencias de caracteres (palabras o frases) que pueden verse en cualquier parte del texto. Además, se supone que el texto no tiene una estructura definida y que los patrones pueden distribuirse de manera aleatoria o uniforme. Además, se espera que el sistema tenga suficiente memoria y capacidad de procesamiento para realizar búsquedas secuenciales, indexadas y por diccionario.
+
+\subsection{Situaciones del borde}
+Para la evaluación completa, se deben tener en cuenta varios casos límite. Esto incluye patrones de búsqueda que aparecen al principio o al final del texto, así como los que no aparecen en el texto. Además, el manejo de patrones que contienen subcadenas repetidas en diferentes partes del texto, así como garantizar que los métodos puedan procesar textos que contienen una variedad de codificaciones y caracteres especiales.
+
+\subsection{Metodología para abordar el problema}
+
+\begin{enumerate}
+    \item \textbf{Implementación de Algoritmos:}
+        \begin{itemize}
+            \item \textbf{Búsqueda Secuencial (Fuerza bruta):} Este método implica revisar cada línea del texto para encontrar coincidencias del patrón, evaluando cada carácter.
+            \item \textbf{Búsqueda Indexada:} Utiliza un índice basado en tablas de hash para almacenar las posiciones de las palabras en el texto, permitiendo búsquedas más rápidas.
+            \item \textbf{Búsqueda por Diccionario:} Utiliza una estructura de diccionario para almacenar todas las palabras del texto, permitiendo búsquedas eficientes de las palabras de interés.
+        \end{itemize}
+    \item \textbf{Construcción del Índice:}
+        \begin{itemize}
+            \item Crear un índice hash a partir del texto, donde cada palabra se mapea a su posición en el texto.
+            \item Este índice permitirá búsquedas rápidas al reducir el espacio de búsqueda.
+        \end{itemize}
+    \item \textbf{Cliente Interactivo:}
+        \begin{itemize}
+            \item Desarrollar un cliente interactivo que permita al usuario cargar diferentes textos y seleccionar el método de búsqueda.
+            \item Proporcionar opciones para ingresar patrones de búsqueda y visualizar los resultados, incluyendo el tiempo de búsqueda y las líneas donde se encontraron coincidencias.
+        \end{itemize}
+    \item \textbf{Comparación Experimental:}
+        \begin{itemize}
+            \item Realizar múltiples pruebas con textos de diferentes tamaños y patrones de búsqueda variados.
+            \item Medir y comparar el tiempo de búsqueda para cada método.
+            \item Analizar el rendimiento y la eficiencia de cada método en diferentes escenarios.
+        \end{itemize}
+\end{enumerate}
+\newpage
+
+
+
+%-----------Solución del Problema------------%
+\section{Solución del Problema}
+
+\subsection{Metodología}
+Para abordar el problema de la búsqueda eficiente de patrones en textos, se ha diseñado una solución que comprende varios pasos, incluyendo la implementación de algoritmos, la construcción de un índice hash, el desarrollo de un cliente interactivo y la realización de pruebas experimentales.
+\newline
+\newline
+Se muestra la estructura  del archivo donde esta los datos e información relevante:
+
+\begin{figure}[h]
+\dirtree{%
+.1 /.
+.2 Cornejo\_Gonzalez.zip.
+.3 Cornejo\_Gonzalez.
+.4 fuente.
+.5 EXECUTE.
+.5 README.
+.5 src.
+.6 cliente\_interactivo.py.
+.6 tabla\_hash.py.
+.6 busqueda\_fuerza\_bruta.py.
+.6 busqueda\_con\_diccionario.py.
+.6 foo.bar.
+.4 informe.
+.5 Cornejo\_Gonzalez.pdf.
+.5 Cornejo\_Gonzalez.tex.
+.5 Cornejo\_Gonzalez.zip.
+.4 proyecto.tex.
+.4 hawking-stephen-historia-del-tiempo.txt.
+.4 biblia.txt.
+}
+\caption{Estructura del archivo.}
+\label{fig_estructura}
+\end{figure}
+
+
+\subsection{Algoritmo de solución}
+El enfoque para solucionar el problema de búsqueda eficiente de patrones en textos implica tres métodos principales: búsqueda por fuerza bruta, búsqueda indexada utilizando tablas de hash y búsqueda por diccionario. Presentando a continuación los programas de los logaritmos:
+
+\subsubsection{Búsqueda por Fuerza Bruta}
+La función ``\texttt{busqueda\_fuerza\_bruta}'': implementa el algoritmo de búsqueda secuencial o fuerza bruta para encontrar todas las ocurrencias de un patrón en un texto. Funciona recorriendo línea por línea del texto y en cada línea, busca el patrón utilizando la función ``\texttt{contar\_patron}''. Si se encuentra una coincidencia, se registra la línea, el número de ocurrencias y el índice de la línea donde se encontró la coincidencia en una lista de resultados. Donde finalmente, devuelve el ``\texttt{return}'' de esta lista de resultados.
+\newline
+\newline
+La función ``\texttt{contar\_patron}'' cuenta el número de veces que aparece un patrón en una línea dada utilizando un enfoque de ventana deslizante. Itera sobre la línea y en cada posición, verifica si la subcadena de longitud igual al patrón coincide con el patrón dado. Si hay una coincidencia, incrementa un contador. Al final, devuelve el número total de ocurrencias del patrón en la línea.
+\newline
+\newline
+Presentando el programa completo de Búsqueda por Fuerza Bruta:
+\begin{figure}[H]
+  \centering
+  \lstinputlisting{Codigos/busqueda_fuerza_bruta.py}
+  \caption{Código de búsqueda de fuerza bruta en Python}
+  \label{fig:codigo-ejemplo}
+\end{figure}
+
+\subsubsection{Índice Basado en Tablas de Hash}
+La clase ``\texttt{TablaHash}'' implementa una estructura de tabla hash para indexar palabras en un texto y facilitar la búsqueda eficiente de líneas donde aparecen estas palabras. Al inicializar un objeto TablaHash con un texto, se construye un índice que mapea cada palabra única a una lista de números de línea donde esa palabra aparece. Esto se logra mediante los métodos ``\texttt{construir\_indice}'', que recorre cada línea del texto para extraer y agregar palabras al índice, y ``\texttt{agregar}'' , que asigna índices a nuevas palabras y actualiza las listas de líneas asociadas. La búsqueda se realiza con el método ``\texttt{buscar}'', que devuelve las líneas correspondientes a una palabra dada si está presente en el índice, permitiendo así una recuperación rápida de información en grandes volúmenes de texto.
+\newline
+\newline
+Presentando el programa completo de Índice Basado en Tablas de Hash:
+\lstinputlisting{Codigos/tabla_hash.py}
+\begin{figure}[H]
+  \centering
+  \caption{Código de Búsqueda por Diccionario en Python}
+  \label{fig:codigo-tabla-hash}
+\end{figure}
+
+\subsubsection{Búsqueda por Diccionario }
+La primera función, ``\texttt{construir\_indice\_con\_diccionario}'',  se encarga de construir un índice de palabras a partir de un texto dado. Utiliza un diccionario donde cada clave representa una palabra única encontrada en el texto. Cada valor en el diccionario es un conjunto que contiene los números de línea donde esa palabra específica aparece. Durante la construcción del índice, se itera línea por línea a través del texto, se separan las palabras, se eliminan los espacios en blanco y se convierten todas las palabras a minúsculas para normalizarlas. Si una palabra no está presente en el índice, se agrega como nueva clave con un conjunto vacío y se añade el número de línea actual al conjunto asociado a esa palabra. Esta estructura de datos asegura que cada palabra se mapee eficientemente a todas las líneas donde ocurre, permitiendo búsquedas rápidas y eficientes de ocurrencias de palabras en el texto.
+\newline
+\newline
+La segunda función, ``\texttt{buscar\_con\_diccionario}'', recibe como entrada un índice construido previamente y una palabra para buscar en el texto. La función verifica si la palabra está presente en el índice y, si es así, devuelve la lista de números de línea donde aparece la palabra. Si la palabra no está en el índice, la función devuelve una lista vacía.
+\newline
+\newline
+Presentando el programa completo de Búsqueda por Diccionario:
+\begin{figure}[H]
+  \centering
+  \lstinputlisting{Codigos/busqueda_con_diccionario.py}
+  \caption{Código de Búsqueda por Diccionario en Python}
+  \label{fig:codigo-tabla-hash}
+\end{figure}
+
+\subsubsection{Programa Principal y Cliente Interactivo}
+El archivo \texttt{cliente\_interactivo.py} implementa un cliente que interactúa con la interfaz que permite seleccionar y buscar patrones en diferentes archivos de texto utilizando dos métodos de búsqueda: fuerza bruta, búsqueda indexada y búsqueda con diccionarios. A continuación, se detalla su funcionamiento:
+\newline
+\newline
+\noindent\textbf{Carga de Archivos:}
+\newline
+\newline
+\texttt{cargar\_archivo(nombre\_archivo)}: Carga el contenido de un archivo de texto especificado y lo devuelve como una lista de líneas. La codificación del archivo se determina por su extensión.
+\newline
+\newline
+\noindent\textbf{Búsqueda Indexada:}
+\newline
+\newline
+\texttt{realizar\_busqueda\_indexada(tabla\_hash, patron)}: Realiza una búsqueda indexada utilizando una tabla de hash. Inicia un contador de tiempo antes de realizar la búsqueda, busca las líneas que contienen el patrón en la \texttt{tabla\_hash}, y registra el tiempo de ejecución en microsegundos. Luego, recorre las líneas encontradas para contar las ocurrencias exactas del patrón (ignorando mayúsculas y minúsculas) en cada línea. Finalmente, devuelve una lista de tuplas que contiene el número de línea, el contador de ocurrencias y la línea completa, junto con el tiempo de búsqueda.
+\newline
+\newline
+\noindent\textbf{Interfaz Interactiva:}
+\newline
+\newline
+\texttt{main()}: Proporciona una interfaz de línea de comandos para que el usuario seleccione un archivo y un método de búsqueda, ingresando un patrón a buscar y vea los resultados. El menú permite cambiar el archivo, seleccionar el método de búsqueda, y salir del programa.
+\newline
+\newline
+\newline
+Presentando el programa completo de Cliente Interactivo:
+\lstinputlisting[language=Python, basicstyle=\footnotesize, linewidth=0.9\linewidth]{Codigos/cliente_interactivo.py}
+\begin{figure}[H]
+  \centering
+  \caption{Código de Cliente Interactivo en Python}
+  \label{fig:codigo-tabla-hash}
+\end{figure}
+\newpage
+
+\subsection{Diagrama de Estados}
+Se incluye el diagrama de estados que muestra de manera global el funcionamiento del programa. Presentando a continuación:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.05\linewidth]{Codigos/_Diagrama de flujo de estado actual_futuro - Corriente (1).png}
+    \caption{Diagrama de Estados}
+    \label{fig:enter-label}
+\end{figure}
+
+
+\subsection{Implementación}
+Se mostrará la interpretación del pseudo código de los tres programas, los cuales son, \texttt{busqueda\_fuerza\_bruta.py}, \texttt{tabla\_hash.py}, \texttt{buscar\_con\_diccionario.py} y
+\newline
+\texttt{cliente\_interactivo.py}. A continuación se muestra el pseudo código de cada uno de los programas de logartimos:
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{Codigos/pseudo_codigo_bruto.png}
+  \caption{Pseudo-código de la búsqueda por fuerza bruta.}
+  \label{fig:pseudocodigo}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1\linewidth]{Codigos/tabla2222.png}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{Codigos/tabla11111.png}
+  \caption{Pseudo-código de la Tabla de Hash.}
+  \label{fig:pseudocodigo}
+\end{figure}
+
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1\linewidth]{Codigos/diccionario.png}
+  \caption{Pseudo-código de búsqueda con diccionario.}
+  \label{fig:pseudocodigo}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=1.1\linewidth]{Codigos/cliente1.png}
+\end{figure}
+\begin{figure}
+    \centering
+    \includegraphics[width=1.1\linewidth]{Codigos/cliente2.png}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=1.1\linewidth]{Codigos/cliente3.png}
+  \caption{Pseudo-código del Cliente Interactivo.}
+\end{figure}
+\newpage
+
+
+
+
+\subsection{Modo de uso}
+El programa \texttt{cliente\_interactivo.py} ofrece una interfaz sencilla para buscar patrones en archivos de texto. Para utilizarlo, primero asegúrarse de tener Python instalado la versión 3.13 como mínima en el sistema. Luego, abrir una terminal o línea de comandos y navegue hasta el directorio donde se encuentra el archivo \texttt{cliente\_interactivo.py}. Ejecute el programa.
+\newline
+\newline
+Una vez en ejecución, el programa mostrará una lista de archivos de texto disponibles para buscar. Seleccionando el archivo deseado ingresando el número correspondiente y presionando Enter. Luego elegir el método de búsqueda: fuerza bruta o búsqueda indexada, ingresando el número correspondiente.
+\newline
+\newline
+Después de seleccionar el método de búsqueda, se le pedirá el ingreso del patrón que desea buscar en el archivo. Ingresando el patrón y presionar Enter. El programa realizará la búsqueda y mostrará los resultados, incluido el tiempo de búsqueda, el número de líneas encontradas y el total de ocurrencias del patrón. Para cada línea encontrada, se mostrará su número, el número de apariciones del patrón en la línea y el contenido de la línea.
+\newline
+\newline
+Después de mostrar los resultados, se ofrecerán opciones adicionales: realizar una nueva búsqueda, cambiar el archivo o salir del programa. Simplemente seleccionar la opción deseada ingresando el número correspondiente.
+\newline
+\newline
+\noindent\textbf{Modo de compilación:}
+\newline
+\newline
+Para compilar el programa en los computadores de la Universidad u otro lugar, primero asegurarse de que Python esté instalado en los computadores. Luego, copiar todos los archivos relacionados con el proyecto en el directorio donde se desea compilar el programa.
+\newline
+\newline
+Una vez copiados los archivos, abrir una terminal o línea de comandos en el directorio y ejecutar el programa escribiendo: \begin{verbatim}
+python fuente/src/cliente_interactivo.py
+\end{verbatim} Siga las instrucciones en la interfaz para realizar búsquedas según sea necesario.
+\newpage
+
+\subsection{Pruebas}
+Se realizaron diversas pruebas utilizando distintos archivos de texto y patrones de búsqueda para evaluar el rendimiento y la efectividad de los algoritmos implementados. A continuación se muestran los resultados obtenidos:
+
+\begin{landscape} % Cambio de orientación a horizontal
+\begin{table}[H]
+\centering
+\tiny % Cambio de tamaño de la tabla
+\begin{adjustbox}{max width=\textheight} % Cambio de ancho de la tabla
+\renewcommand{\arraystretch}{1.7}
+\begin{tabular}{@{}>{\fontsize{12}{10}\selectfont}l>{\fontsize{11}{10}\selectfont}l>{\fontsize{10}{10}\selectfont}c>{\fontsize{10}{10}\selectfont}c>{\fontsize{10}{10}\selectfont}c@{}}
+\toprule
+{\fontsize{12}{10}\selectfont Archivo}       & Palabra o Patrón & \multicolumn{3}{c}{\fontsize{10}{10}\selectfont Tiempo de Búsqueda (microsegundos)} \\ \cmidrule(lr){3-5}
+             &                   & Fuerza Bruta & Búsqueda Indexada & Búsqueda con Diccionario \\ \midrule
+proyecto.tex & a                 & 966,2        & 5,6             & 56,5                    \\
+             & e                 & 911,9        & 4,6               & 1,2                    \\
+             & y                 & 871,4        & 7,6             & 81,6                    \\
+             & de                & 1.004,2       & 7,6            & 157                   \\
+             & que               & 953,9        & 7,2               & 69,5                      \\
+             & el                & 1.032,3       & 8,7             & 145,9                    \\ \midrule
+hawking.txt  & a                 & 33.345,6      & 7,5            & 2880,1                    \\
+             & e                 & 33.498,8      & 7,7             & 112,9                  \\
+             & y                 & 31.630,2      & 6,1            & 2918                  \\
+             & de                & 38.196,9      & 11,0           & 8274,3                  \\
+             & que               & 36.385,4      & 6,6           & 6262,7                  \\
+             & el                & 37.253,8      & 9,2           & 4821,3                  \\ \midrule
+biblia.txt   & a                 & 309.251,5     & 9,8          & 41.554,6                 \\
+             & e                 & 303.785,2     & 7,9            & 1.803,0                 \\
+             & y                 & 291.492,2     & 6,7          & 79.472,8                 \\
+             & de                & 342.287,9     & 8,7          & 76.657,6                 \\
+             & que               & 332.632,1     & 11,7          & 43.632,7                 \\
+             & el                & 341.542,9     & 8,2          & 37.458,9                   \\ \bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Tiempo de búsqueda para diferentes archivos y palabras}
+\label{tab:tiempo-busqueda}
+\end{table}
+\end{landscape}
+\newline
+\newline
+\newline
+Presentando el detalle de cada uno de los archivos y de las búsquedas:
+
+\begin{landscape} % Cambio de orientación a horizontal
+\begin{table}[H]
+\centering
+\small % Cambio de tamaño de la tabla
+\begin{adjustbox}{max width=\textheight} % Cambio de ancho de la tabla
+\renewcommand{\arraystretch}{2} % Ajuste del espaciado entre filas
+\begin{tabular}{@{}ll>{\centering\arraybackslash}p{2.5cm}>{\centering\arraybackslash}p{3.5cm}>{\centering\arraybackslash}p{2cm}>{\centering\arraybackslash}p{3.5cm}@{}}
+\toprule
+Archivo         & Palabra   & Tipo de Búsqueda        & Tiempo de Búsqueda (microsegundos) & Búsquedas encontradas & Líneas encontradas \\
+\midrule
+proyecto.tex    & a         & Fuerza Bruta            & 1270,1                              & 928                  & 187                \\
+proyecto.tex    & a         & Búsqueda Indexada       & 7,8                              & 22                  & 22                \\
+proyecto.tex    & a         & Búsqueda con Diccionario & 51,7                            & 22                  & 22                \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Tiempo de búsqueda del archivo "proyecto.txt"}
+\label{tab:ejemplo}
+\end{table}
+\end{landscape}
+
+\begin{landscape} % Cambio de orientación a horizontal
+\begin{table}[H]
+\centering
+\small % Cambio de tamaño de la tabla
+\begin{adjustbox}{max width=\textheight} % Cambio de ancho de la tabla
+\renewcommand{\arraystretch}{2} % Ajuste del espaciado entre filas
+\begin{tabular}{@{}ll>{\centering\arraybackslash}p{2.5cm}>{\centering\arraybackslash}p{3.5cm}>{\centering\arraybackslash}p{2cm}>{\centering\arraybackslash}p{3.5cm}@{}}
+\toprule
+Archivo         & Palabra   & Tipo de Búsqueda        & Tiempo de Búsqueda (microsegundos) & Búsquedas encontradas & Líneas encontradas \\
+\midrule
+hawking.txt    & a         & Fuerza Bruta            & 34106,4                              & 38.187                  & 5.480                \\
+hawking.txt    & a         & Búsqueda Indexada       & 7,1                              & 1.152                  & 1.054                \\
+hawking.txt    & a         & Búsqueda con Diccionario & 2810                            & 1.207                  & 1.109                \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Tiempo de búsqueda del archivo "hawking-stephen-historia-del-tiempo.txt"}
+\label{tab:ejemplo}
+\end{table}
+\end{landscape}
+
+\begin{landscape} % Cambio de orientación a horizontal
+\begin{table}[H]
+\centering
+\small % Cambio de tamaño de la tabla
+\begin{adjustbox}{max width=\textheight} % Cambio de ancho de la tabla
+\renewcommand{\arraystretch}{2} % Ajuste del espaciado entre filas
+\begin{tabular}{@{}ll>{\centering\arraybackslash}p{2.5cm}>{\centering\arraybackslash}p{3.5cm}>{\centering\arraybackslash}p{2cm}>{\centering\arraybackslash}p{3.5cm}@{}}
+\toprule
+Archivo         & Palabra   & Tipo de Búsqueda        & Tiempo de Búsqueda (microsegundos) & Búsquedas encontradas & Líneas encontradas \\
+\midrule
+biblia.txt    & a         & Fuerza Bruta            & 325163,3                              & 328.581                  & 63.629                \\
+biblia.txt    & a         & Búsqueda Indexada       & 9,5                              & 19.854                  & 16.487                \\
+biblia.txt    & a         & Búsqueda con Diccionario & 42919,2                            & 20.116                  & 16.747                \\
+\bottomrule
+\end{tabular}
+\end{adjustbox}
+\caption{Tiempo de búsqueda del archivo "biblia.txt"}
+\label{tab:ejemplo}
+\end{table}
+\end{landscape} 
+
+
+\newpage
+
+
+%-----------Discusión------------%
+\section{Discusión}
+Se evaluaron los datos de los tres métodos de búsqueda para determinar su eficacia en la búsqueda de patrones en textos: fuerza bruta, búsqueda indexada mediante tablas de hash y búsqueda por diccionario. Los resultados obtenidos muestran diferencias significativas en el rendimiento de cada método, dependiendo del tamaño del archivo y la naturaleza del patrón buscado, el cual comparandolos es la siguiente:
+\begin{itemize}
+            \item El archivo \texttt{proyecto.tex} es relativamente más corto y contiene un conjunto diverso de palabras comunes en español, como ``a'', ``e'', ``y'', ``de'', ``que'' y ``el'', la búsqueda indexada y la búsqueda con diccionario son más efectivas en términos de tiempo de búsqueda en comparación con la fuerza bruta. Esto se debe a que el costo de construir el índice o el diccionario inicialmente se compensa con una búsqueda más rápida y eficiente, especialmente cuando el texto es corto y el patrón de búsqueda es común. Por otro lado, la fuerza bruta puede funcionar mejor en archivos muy pequeños o cuando el patrón de búsqueda es único y la construcción de un índice no es necesaria.
+            
+            \item El archivo \texttt{hawking.txt} es más largo y complejo, lo que se refleja en los tiempos de búsqueda más largos en comparación con \texttt{proyecto.tex}. Sin embargo, tanto la búsqueda indexada como la búsqueda con diccionario siguen siendo más rápidas que la fuerza bruta. Esto indica que la creación de un índice o un diccionario puede mejorar el rendimiento de búsqueda de patrones incluso en archivos más grandes y complejos.
+
+            \item El archivo \texttt{biblia.txt} es el más pesado y largo de los tres, con tiempos de búsqueda aún más largos que los otros dos. Sin embargo, en términos de eficiencia, la búsqueda indexada superan a la fuerza bruta y la búsqueda de diccionario. Esto destaca el uso de estructuras de datos optimizadas, especialmente en archivos grandes, donde la fuerza bruta puede volverse imposible debido a la complejidad y el tiempo de procesamiento requeridos.
+        \end{itemize}
+
+La eficacia de cada método de búsqueda depende del patrón de búsqueda, el tamaño y la complejidad del texto. En la mayoría de los casos, la búsqueda indexada y la búsqueda con diccionario son preferibles, ya que ofrecen tiempos de búsqueda más cortos y eficientes, especialmente en archivos más grandes y complejos. Por último, la fuerza bruta puede ser mejor para archivos muy pequeños o cuando el patrón de búsqueda es único y la creación de un índice no es necesaria.
+\newpage
+\textbf{Fuerza Bruta}
+El método revisa línea por línea del texto buscando un patrón, lo que resulta en una complejidad $O(n \cdot m)$ donde $n$ es el número de líneas y $m$ la longitud del patrón, el cual sería $O(n^{2})$. Es sencillo pero ineficiente para archivos grandes debido al aumento significativo en el tiempo de búsqueda conforme crece el archivo y el patrón.
+\newline
+\newline
+\textbf{Búsqueda Indexada}
+La búsqueda indexada utiliza una tabla de hash para almacenar las posiciones de las palabras en el texto, permitiendo búsquedas rápidas $O(1)$ una vez construido el índice. Es altamente eficiente para archivos grandes, aunque la construcción inicial del índice puede ser costosa en tiempo y memoria, especialmente para textos extensos con muchas palabras únicas.
+\newline
+\newline
+\textbf{Búsqueda por Diccionario}
+Emplea un diccionario que mapea cada palabra única a las líneas donde aparece en el texto. Proporciona una búsqueda eficiente, similar a la búsqueda indexada, centrada en encontrar palabras específicas en lugar de patrones complejos. Los tiempos de búsqueda son competitivos con la búsqueda indexada, dependiendo de la estructura del diccionario y la implementación de la búsqueda.
+
+
+
+\newpage
+
+
+
+%-----------Conclusión------------%
+\section{Conclusión}
+El proyecto ha demostrado que aplicando estrategias de búsqueda efectivas a la manipulación de textos es crucial, especialmente cuando se trabaja con grandes cantidades de datos. Se ha demostrado mediante comparaciones experimentales entre métodos como la fuerza bruta, la búsqueda indexada y la búsqueda por diccionario que el uso de estructuras de datos como las tablas de hash pueden optimizar significativamente los tiempos de búsqueda y mejorar la eficiencia en la gestión de una gran cantidad de información. Estos resultados destacan la importancia de investigar y aplicar técnicas avanzadas en el ámbito de las estructuras de datos y los algoritmos. Estos hallazgos establecen una base sólida para futuros desarrollos en la optimización de búsqueda de datos en una variedad de aplicaciones informáticas.
+
+\section{Anexos}
+\begin{enumerate}
+    \item[\textbf{[1]}] Algoritmo de fuerza bruta de Python. foro ayuda. \url{https://foroayuda.es/algoritmo-de-fuerza-bruta-de-python/}
+    
+    \item[\textbf{[2]}] Tablas Hash. UVM \url{https://es.slideshare.net/slideshow/15-tablas-hash/1222737#28}
+    
+    \item[\textbf{[3]}] Diccionarios Python: Guía + Ejercicios 2024. bigbaydata. \url{https://www.bigbaydata.com/diccionarios-python/}
+\end{enumerate}
+
+\end{document}
