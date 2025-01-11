@@ -49,21 +49,36 @@ Este repositorio contiene la implementación y evaluación de métodos eficiente
 
 ## 📂 Estructura del Proyecto
 ├── fuente/ 
-│   ├── EXECUTE
-│   ├── README
-│   ├── src/
-│   │   ├── cliente_interactivo.py 
-│   │   ├── tabla_hash.py
-│   │   ├── busqueda_fuerza_bruta.py
-│   │   ├── busqueda_con_diccionario.py
-│   │   └── foo.bar
-├── informe/
-│   ├── Cornejo_Gonzalez.pdf
-│   ├── Cornejo_Gonzalez.tex
-│   └── Cornejo_Gonzalez.zip
-├── proyecto.tex
-├── hawking-stephen-historia-del-tiempo.txt
-└── biblia.txt
+  
+  │     -  -   ├─── EXECUTE
+  
+  │     -  -   ├── README
+  
+  │     -  -   ├── src/
+  
+  │     -  -   │     -  -   ├── cliente_interactivo.py
+  
+  │     -  -   │     -  -   ├── tabla_hash.py
+  
+  │     -  -   │     -  -   ├── busqueda_fuerza_bruta.py
+  
+  │     -  -   │     -  -   ├── busqueda_con_diccionario.py
+  
+  │     -  -   │     -  -   └── foo.bar
+  
+  ├── informe/
+  
+  │     -  -   ├── Cornejo_Gonzalez.pdf
+  
+  │     -  -   ├── Cornejo_Gonzalez.tex
+  
+  │     -  -   └── Cornejo_Gonzalez.zip
+  
+  ├── proyecto.tex
+  
+  ├── hawking-stephen-historia-del-tiempo.txt
+  
+  └── biblia.txt
 
 
 ## 👥 Autor
