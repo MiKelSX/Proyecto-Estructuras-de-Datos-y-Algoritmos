@@ -1,8 +1,0 @@
-### comandos necesarios:
-
-```bash
-#!/bin/bash
-
-###Ejecutar el programa en el Terminal powershell:
-
-python fuente/src/cliente_interactivo.py
